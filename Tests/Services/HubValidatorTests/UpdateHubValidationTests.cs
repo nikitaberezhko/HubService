@@ -1,7 +1,6 @@
 using Exceptions.Contracts.Services;
 using FluentValidation;
 using Moq;
-using NetTopologySuite.Geometries;
 using Services.Models.Request;
 using Services.Validation;
 using Xunit;
@@ -33,7 +32,8 @@ public class UpdateHubValidationTests
             Id = Guid.NewGuid(),
             Address = "address",
             City = "city",
-            Location = new Point(1,1)
+            Latitude = 1,
+            Longitude = 1
         };
         
         // Act
@@ -52,7 +52,8 @@ public class UpdateHubValidationTests
             Id = Guid.Empty,
             Address = "address",
             City = "city",
-            Location = new Point(1,1)
+            Latitude = 1,
+            Longitude = 1
         };
         
         // Act
@@ -70,7 +71,8 @@ public class UpdateHubValidationTests
             Id = Guid.NewGuid(),
             Address = "",
             City = "city",
-            Location = new Point(1,1)
+            Latitude = 1,
+            Longitude = 1
         };
         
         // Act
@@ -88,7 +90,8 @@ public class UpdateHubValidationTests
             Id = Guid.NewGuid(),
             Address = "address",
             City = "",
-            Location = new Point(1,1)
+            Latitude = 1,
+            Longitude = 1
         };
         
         // Act
@@ -98,7 +101,7 @@ public class UpdateHubValidationTests
     }
     
     [Fact]
-    public async Task ValidateAsync_Should_Throw_ServiceException_If_Location_Is_Null()
+    public async Task ValidateAsync_Should_Throw_ServiceException_If_Latitude_Less_Than_Negative_90()
     {
         // Arrange
         var model = new UpdateHubModel
@@ -106,7 +109,65 @@ public class UpdateHubValidationTests
             Id = Guid.NewGuid(),
             Address = "address",
             City = "city",
-            Location = null
+            Latitude = -91,
+            Longitude = 1
+        };
+        
+        // Act
+        
+        // Assert
+        await Assert.ThrowsAsync<ServiceException>(() => _validator.ValidateAsync(model));
+    }
+    
+    [Fact]
+    public async Task ValidateAsync_Should_Throw_ServiceException_If_Latitude_Greater_Than_90()
+    {
+        // Arrange
+        var model = new UpdateHubModel
+        {
+            Id = Guid.NewGuid(),
+            Address = "address",
+            City = "city",
+            Latitude = 91,
+            Longitude = 1
+        };
+        
+        // Act
+        
+        // Assert
+        await Assert.ThrowsAsync<ServiceException>(() => _validator.ValidateAsync(model));
+    }
+    
+    [Fact]
+    public async Task ValidateAsync_Should_Throw_ServiceException_If_Longitude_Less_Than_Negative_180()
+    {
+        // Arrange
+        var model = new UpdateHubModel
+        {
+            Id = Guid.NewGuid(),
+            Address = "address",
+            City = "city",
+            Latitude = 1,
+            Longitude = -181
+        };
+        
+        // Act
+        
+        // Assert
+        await Assert.ThrowsAsync<ServiceException>(() => _validator.ValidateAsync(model));
+    }
+    
+    [Fact]
+    public async Task ValidateAsync_Should_Throw_ServiceException_If_Longitude_Greater_Than_180()
+    {
+        // Arrange
+        var model = new UpdateHubModel
+        {
+            Id = Guid.NewGuid(),
+            Address = "address",
+            City = "city",
+            Latitude = 91,
+            Longitude = 1
         };
         
         // Act

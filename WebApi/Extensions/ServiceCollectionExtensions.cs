@@ -8,7 +8,6 @@ using Persistence.EntityFramework;
 using Services.Mapper;
 using Services.Models.Request;
 using Services.Repositories.Interfaces;
-using Services.Services.Implementations;
 using Services.Services.Interfaces;
 using Services.Validation;
 using Services.Validation.Validators;
@@ -22,7 +21,9 @@ public static class ServiceCollectionExtensions
         string connectionString)
     {
         services.AddDbContext<DataContext>(options =>
-            options.UseNpgsql(connectionString, o => o.UseNetTopologySuite()));
+        {
+            options.UseNpgsql(connectionString);
+        });
         services.AddScoped<DbContext, DataContext>();
         
         return services;
@@ -61,7 +62,7 @@ public static class ServiceCollectionExtensions
     
     public static IServiceCollection AddServices(this IServiceCollection services)
     {
-        services.AddScoped<IHubService, HubService>();
+        services.AddScoped<IHubService, Services.Services.Implementations.HubService>();
         
         return services;
     }
@@ -72,7 +73,6 @@ public static class ServiceCollectionExtensions
         
         return services;
     }
-    
     
     public static IServiceCollection AddVersioning(this IServiceCollection services)
     {

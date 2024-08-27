@@ -14,7 +14,8 @@ public class ServicesMappingProfile : Profile
             .ForMember(d => d.Id, map => map.Ignore())
             .ForMember(d => d.Address, map => map.MapFrom(c => c.Address))
             .ForMember(d => d.City, map => map.MapFrom(c => c.City))
-            .ForMember(d => d.Location, map => map.MapFrom(c => c.Location))
+            .ForMember(d => d.Latitude, map => map.MapFrom(c => c.Latitude))
+            .ForMember(d => d.Longitude, map => map.MapFrom(c => c.Longitude))
             .ForMember(d => d.IsDeleted, map => map.Ignore());
 
 
@@ -22,7 +23,8 @@ public class ServicesMappingProfile : Profile
             .ForMember(d => d.Id, map => map.MapFrom(c => c.Id))
             .ForMember(d => d.Address, map => map.MapFrom(c => c.Address))
             .ForMember(d => d.City, map => map.MapFrom(c => c.City))
-            .ForMember(d => d.Location, map => map.MapFrom(c => c.Location))
+            .ForMember(d => d.Latitude, map => map.MapFrom(c => c.Latitude))
+            .ForMember(d => d.Longitude, map => map.MapFrom(c => c.Longitude))
             .ForMember(d => d.IsDeleted, map => map.Ignore());
 
 
@@ -30,7 +32,8 @@ public class ServicesMappingProfile : Profile
             .ForMember(d => d.Id, map => map.MapFrom(c => c.Id))
             .ForMember(d => d.Address, map => map.Ignore())
             .ForMember(d => d.City, map => map.Ignore())
-            .ForMember(d => d.Location, map => map.Ignore())
+            .ForMember(d => d.Latitude, map => map.Ignore())
+            .ForMember(d => d.Longitude, map => map.Ignore())
             .ForMember(d => d.IsDeleted, map => map.Ignore());
 
 
@@ -38,7 +41,8 @@ public class ServicesMappingProfile : Profile
             .ForMember(d => d.Id, map => map.MapFrom(c => c.Id))
             .ForMember(d => d.Address, map => map.Ignore())
             .ForMember(d => d.City, map => map.Ignore())
-            .ForMember(d => d.Location, map => map.Ignore())
+            .ForMember(d => d.Latitude, map => map.Ignore())
+            .ForMember(d => d.Longitude, map => map.Ignore())
             .ForMember(d => d.IsDeleted, map => map.Ignore());
 
 
@@ -46,7 +50,8 @@ public class ServicesMappingProfile : Profile
             .ForMember(d => d.Id, map => map.Ignore())
             .ForMember(d => d.Address, map => map.Ignore())
             .ForMember(d => d.City, map => map.MapFrom(c => c.City))
-            .ForMember(d => d.Location, map => map.Ignore())
+            .ForMember(d => d.Latitude, map => map.Ignore())
+            .ForMember(d => d.Longitude, map => map.Ignore())
             .ForMember(d => d.IsDeleted, map => map.Ignore());
 
         
@@ -56,6 +61,7 @@ public class ServicesMappingProfile : Profile
             .ForMember(d => d.Id, map => map.MapFrom(c => c.Id))
             .ForMember(d => d.Address, map => map.MapFrom(c => c.Address))
             .ForMember(d => d.City, map => map.MapFrom(c => c.City))
-            .ForMember(d => d.Location, map => map.MapFrom(c => c.Location));
+            .ForMember(d => d.Latitude, map => map.MapFrom(c => c.Latitude))
+            .ForMember(d => d.Longitude, map => map.MapFrom(c => c.Longitude));
     }
 }

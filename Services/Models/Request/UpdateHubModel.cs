@@ -1,5 +1,3 @@
-using NetTopologySuite.Geometries;
-
 namespace Services.Models.Request;
 
 public class UpdateHubModel
@@ -10,5 +8,7 @@ public class UpdateHubModel
     
     public string City { get; set; }
     
-    public Point Location { get; set; }
+    public double Latitude { get; set; }
+    
+    public double Longitude { get; set; }
 }

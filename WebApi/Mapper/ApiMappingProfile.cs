@@ -1,9 +1,10 @@
 using AutoMapper;
+using HubService.Contracts.ApiModels;
+using HubService.Contracts.Request;
+using HubService.Contracts.Response;
 using Services.Models.Request;
 using Services.Models.Response;
-using WebApi.Models.ApiModels;
-using WebApi.Models.Request;
-using WebApi.Models.Response;
+
 
 namespace WebApi.Mapper;
 
@@ -15,7 +16,8 @@ public class ApiMappingProfile : Profile
         CreateMap<CreateHubRequest, CreateHubModel>()
             .ForMember(d => d.Address, map => map.MapFrom(c => c.Address))
             .ForMember(d => d.City, map => map.MapFrom(c => c.City))
-            .ForMember(d => d.Location, map => map.MapFrom(c => c.Location));
+            .ForMember(d => d.Latitude, map => map.MapFrom(c => c.Latitude))
+            .ForMember(d => d.Longitude, map => map.MapFrom(c => c.Longitude));
 
 
         CreateMap<DeleteHubRequest, DeleteHubModel>()
@@ -28,46 +30,47 @@ public class ApiMappingProfile : Profile
         
         CreateMap<GetHubsByCityRequest, GetHubsByCityModel>()
             .ForMember(d => d.City, map => map.MapFrom(c => c.City));
-        
+
 
         CreateMap<UpdateHubRequest, UpdateHubModel>()
             .ForMember(d => d.Id, map => map.MapFrom(c => c.Id))
             .ForMember(d => d.Address, map => map.MapFrom(c => c.Address))
             .ForMember(d => d.City, map => map.MapFrom(c => c.City))
-            .ForMember(d => d.Location, map => map.MapFrom(c => c.Location));
+            .ForMember(d => d.Latitude, map => map.MapFrom(c => c.Latitude))
+            .ForMember(d => d.Longitude, map => map.MapFrom(c => c.Longitude));
         
         
 
         // Response models -> Responses
-        CreateMap<HubModel, CreateHubResponse>()
-            .ForMember(d => d.Id, map => map.MapFrom(c => c.Id));
-        
-
         CreateMap<HubModel, DeleteHubResponse>()
             .ForMember(d => d.Id, map => map.MapFrom(c => c.Id))
             .ForMember(d => d.Address, map => map.MapFrom(c => c.Address))
             .ForMember(d => d.City, map => map.MapFrom(c => c.City))
-            .ForMember(d => d.Location, map => map.MapFrom(c => c.Location));
+            .ForMember(d => d.Latitude, map => map.MapFrom(c => c.Latitude))
+            .ForMember(d => d.Longitude, map => map.MapFrom(c => c.Longitude));
 
-        
+
         CreateMap<HubModel, GetHubByIdResponse>()
             .ForMember(d => d.Id, map => map.MapFrom(c => c.Id))
             .ForMember(d => d.Address, map => map.MapFrom(c => c.Address))
             .ForMember(d => d.City, map => map.MapFrom(c => c.City))
-            .ForMember(d => d.Location, map => map.MapFrom(c => c.Location));;
+            .ForMember(d => d.Latitude, map => map.MapFrom(c => c.Latitude))
+            .ForMember(d => d.Longitude, map => map.MapFrom(c => c.Longitude));
         
         
         CreateMap<HubModel, UpdateHubResponse>()
             .ForMember(d => d.Id, map => map.MapFrom(c => c.Id))
             .ForMember(d => d.Address, map => map.MapFrom(c => c.Address))
             .ForMember(d => d.City, map => map.MapFrom(c => c.City))
-            .ForMember(d => d.Location, map => map.MapFrom(c => c.Location));;
+            .ForMember(d => d.Latitude, map => map.MapFrom(c => c.Latitude))
+            .ForMember(d => d.Longitude, map => map.MapFrom(c => c.Longitude));
 
 
         CreateMap<HubModel, HubApiModel>()
             .ForMember(d => d.Id, map => map.MapFrom(c => c.Id))
             .ForMember(d => d.Address, map => map.MapFrom(c => c.Address))
             .ForMember(d => d.City, map => map.MapFrom(c => c.City))
-            .ForMember(d => d.Location, map => map.MapFrom(c => c.Location));;
+            .ForMember(d => d.Latitude, map => map.MapFrom(c => c.Latitude))
+            .ForMember(d => d.Longitude, map => map.MapFrom(c => c.Longitude));
     }
 }

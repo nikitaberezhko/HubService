@@ -1,12 +1,12 @@
 using Asp.Versioning;
 using AutoMapper;
 using CommonModel.Contracts;
+using HubService.Contracts.ApiModels;
+using HubService.Contracts.Request;
+using HubService.Contracts.Response;
 using Microsoft.AspNetCore.Mvc;
 using Services.Models.Request;
 using Services.Services.Interfaces;
-using WebApi.Models.ApiModels;
-using WebApi.Models.Request;
-using WebApi.Models.Response;
 
 namespace WebApi.Controllers;
 
@@ -19,7 +19,7 @@ public class HubController(
 {
     [HttpGet]
     public async Task<ActionResult<CommonResponse<GetAllHubsResponse>>> GetAll(
-        GetAllHubsRequest request)
+        [FromQuery] GetAllHubsRequest request)
     {
         var result = await hubService.GetAll(
             new GetAllHubsModel { Page = request.Page, PageSize = request.PageSize });
@@ -46,7 +46,7 @@ public class HubController(
     {
         var result = await hubService.GetByCity(mapper.Map<GetHubsByCityModel>(request));
         var response = new CommonResponse<GetHubsByCityResponse> 
-            { Data = mapper.Map<GetHubsByCityResponse>(result) };
+            { Data = new GetHubsByCityResponse { Hubs = mapper.Map<List<HubApiModel>>(result) } };
         
         return response;
     }
@@ -56,8 +56,10 @@ public class HubController(
         CreateHubRequest request)
     {
         var result = await hubService.Create(mapper.Map<CreateHubModel>(request));
-        var response = new CommonResponse<CreateHubResponse> 
-            { Data = mapper.Map<CreateHubResponse>(result) };
+        var response = new CommonResponse<CreateHubResponse>
+        {
+            Data = new CreateHubResponse { Id = result }
+        };
         
         return response; 
     }

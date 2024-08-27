@@ -55,7 +55,8 @@ public class HubRepository(DbContext context) : IHubRepository
 
     public async Task<Hub> GetByIdAsync(Hub hub)
     {
-        var hubFromDb = await context.Set<Hub>().FirstOrDefaultAsync(x => x.Id == hub.Id);
+        var hubFromDb = await context.Set<Hub>()
+            .FirstOrDefaultAsync(x => x.Id == hub.Id && !x.IsDeleted);
         if (hubFromDb != null)
             return hubFromDb;
 
@@ -69,13 +70,15 @@ public class HubRepository(DbContext context) : IHubRepository
 
     public async Task<List<Hub>> GetByCityAsync(Hub hub)
     {
-        var hubsFromDb = await context.Set<Hub>().Where(x => x.City == hub.City).ToListAsync();
+        var hubsFromDb = await context.Set<Hub>()
+            .Where(x => x.City == hub.City && !x.IsDeleted).ToListAsync();
         return hubsFromDb;
     }
 
     public async Task<List<Hub>> GetAllAsync(int page, int pageSize)
     {
         var hubs = await context.Set<Hub>()
+            .Where(x => !x.IsDeleted)
             .Skip((page - 1) * pageSize)
             .Take(pageSize)
             .ToListAsync();

@@ -1,5 +1,3 @@
-using NetTopologySuite.Geometries;
-
 namespace Domain;
 
 public class Hub
@@ -10,7 +8,9 @@ public class Hub
     
     public string City { get; set; }
     
-    public Point Location { get; set; }
+    public double Latitude { get; set; }
+    
+    public double Longitude { get; set; }
     
     public bool IsDeleted { get; set; }
 }

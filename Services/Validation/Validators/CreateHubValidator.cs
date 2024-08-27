@@ -11,6 +11,12 @@ public class CreateHubValidator : AbstractValidator<CreateHubModel>
         
         RuleFor(x => x.City).NotEmpty();
         
-        RuleFor(x => x.Location).NotEmpty();
+        RuleFor(x => x.Latitude)
+            .GreaterThanOrEqualTo(-90)
+            .LessThanOrEqualTo(90);
+        
+        RuleFor(x => x.Longitude)
+            .GreaterThanOrEqualTo(-180)
+            .LessThanOrEqualTo(180);
     }
 }
