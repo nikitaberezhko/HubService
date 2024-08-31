@@ -67,13 +67,11 @@ public class HubValidator(
         return true;
     }
 
-    private void ThrowWithErrorValidationMessage()
-    {
+    private void ThrowWithErrorValidationMessage() =>
         throw new ServiceException
         {
             Title = "Model invalid",
             Message = "Model validation failed",
             StatusCode = StatusCodes.Status400BadRequest
         };
-    }
 }

@@ -56,10 +56,12 @@ public class HubController(
         CreateHubRequest request)
     {
         var result = await hubService.Create(mapper.Map<CreateHubModel>(request));
-        var response = new CommonResponse<CreateHubResponse>
-        {
-            Data = new CreateHubResponse { Id = result }
-        };
+        var response = new CreatedResult(
+            nameof(Create),
+            new CommonResponse<CreateHubResponse>
+            {
+                Data = new CreateHubResponse { Id = result }
+            });
         
         return response; 
     }
