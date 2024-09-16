@@ -2,20 +2,20 @@
   deploy-dev:
     driver: bridge
 services:
-#  app:
-#    container_name: hub-service
-#    build:
-#      context: .
-#      dockerfile: WebApi/Dockerfile
-#    environment:
-#      ASPNETCORE_ENVIRONMENT: Production
-#      ASPNETCORE_HTTP_PORTS: 8084
-#    ports:
-#      - "8084:8084"
-#    networks:
-#      - deploy-dev
-#    depends_on:
-#      - hub-db
+  hub:
+    container_name: hub
+    build:
+      context: .
+      dockerfile: WebApi/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_HTTP_PORTS: 8084
+    ports:
+      - "8084:8084"
+    networks:
+      - deploy-dev
+    depends_on:
+      - hub-db
   hub-db:
     container_name: hub-db
     image: postgres:latest
